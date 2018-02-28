@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>angularjs</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="js/angular.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <div>
+        10 + 20 = {{10 +20}}
+    </div>
+    <div ng-controller="myController">
+        <h1>{{message}}</h1>
+        <br> first name = {{employee.firstName}}
+        <br> last name = {{employee.lastName}}
+        <br> gender = {{employee.gender}}
+        <div>
+            <img ng-src="{{country.image}}" alt="{{country.name}}">
+        </div>
+        <div>
+            <input type="text" ng-model="greeting">
+            <br> {{message}}
+            <br> {{greeting}}
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" ng-model="employee.firstName">
+                    </td>
+                    <td>
+                        <input type="text" ng-model="employee.lastName">
+                    </td>
+                    <td>
+                        <input type="text" ng-model="employee.gender">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                </tr>
+                <tr>
+                    <td>{{employee.firstName}}</td>
+                    <td>{{employee.lastName}}</td>
+                    <td>{{employee.gender}}</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="employee in employees">
+                        <td>{{employee.firstName}}</td>
+                        <td>{{employee.lastName}}</td>
+                        <td>{{employee.gender}}</td>
+                        <td>{{employee.salary}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <ul>
+                <li ng-repeat="country in countries">
+                    {{country.name}}
+                    <ul>
+                        <li ng-repeat="city in country.cities">
+                            {{city.name}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Likes</th>
+                        <th>Dislikes</th>
+                        <th>Like/Dislike</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="technology in technologies">
+                        <td>{{technology.name}}</td>
+                        <td>{{technology.likes}}</td>
+                        <td>{{technology.dislikes}}</td>
+                        <td>
+                            <input type="button" value="Like" ng-click="incrementLikes(technology)">
+                            <input type="button" value="Dislike" ng-click="incrementDislikes(technology)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- filter -->
+        <!-- <div>
+			Rows to Display: <input type="number" step="1" min="0" max="5" ng-model="rowLimit">
+			Order By: 	<select ng-model="sortColumn">
+							<option value="name">NAME ASC</option>
+							<option value="dob">DOB ASC</option>
+							<option value="gender">GENDER ASC</option>
+							<option value="salary">SALARY ASC</option>
+							<option value="-salary">SALARY DESC</option>
+						</select>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>DateOfBirth</th>
+						<th>Gender</th>
+						<th>Salary(number)</th>
+						<th>Salary(currency)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="employee in emps | limitTo:rowLimit | orderBy:sortColumn">
+						<td>{{employee.name | uppercase}}</td>
+						<td>{{employee.dob | date:"dd/MM/yyyy"}}</td>
+						<td>{{employee.gender | lowercase}}</td>
+						<td>{{employee.salary | number:2}}</td>
+						<td>{{employee.salary | currency:"$":1}}</td>
+					</tr>	
+				</tbody>
+			</table>
+		</div> -->
+        <!-- sorting -->
+        <div>
+            Click on table head to sort the data:
+            <table>
+                <thead>
+                    <tr>
+                        <th ng-click="sortData('name')">
+                            Name
+                            <div ng-class="getSortData('name')"></div>
+                        </th>
+                        <th ng-click="sortData('dob')">
+                            DateOfBirth
+                            <div ng-class="getSortData('dob')"></div>
+                        </th>
+                        <th ng-click="sortData('gender')">
+                            Gender
+                            <div ng-class="getSortData('gender')"></div>
+                        </th>
+                        <th ng-click="sortData('salary')">
+                            Salary(number)
+                            <div ng-class="getSortData('salary')"></div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="employee in emps | orderBy:sortColumn:reverseSort">
+                        <td>{{employee.name | uppercase}}</td>
+                        <td>{{employee.dob | date:"dd/MM/yyyy"}}</td>
+                        <td>{{employee.gender | lowercase}}</td>
+                        <td>{{employee.salary | number:2}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
